@@ -1,0 +1,56 @@
+body {
+    background-image: url("../images/minimalist_bg.png");
+    background-position: fixed;
+    height: 100%;
+    
+}
+
+.Home{
+    color: black;
+    padding: 2%;
+    float: right;
+}
+
+.navbar-brand{
+    color: white !important;
+}
+
+.bg-faded {
+    background-color: purple;
+}
+
+.welcomeText {
+    font-size: 500%;
+    font-family: sans-serif Helvetica;
+    color: white;
+    padding: 3%;
+    position: absolute;
+    left: 20px;
+    top: 200px;
+}
+
+.navLinks {
+    color: white;
+}
+
+.active {
+    color: gray;
+    
+}
+
+.repeatImage {
+    background-image: url("../images/repeat_purple.jpg");
+    background-repeat: repeat;
+}
+
+
+
+
+
+
+
+
+
+
+
+
