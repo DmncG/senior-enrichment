@@ -28,7 +28,7 @@ router.get('/:campusId/:campusId', function(req, res, next){
     .then(studentsInCampus => {
         res.json(studentsInCampus)
     })
-    .catch()
+    .catch(next)
 })
 
 router.put('/:id', function(req, res, next) {
@@ -50,9 +50,9 @@ router.delete('/:id', function(req, res, next){
 })
 
 router.post('/', function(req, res, next) {
-    Students.create({name: req.body.name, email: req.body.email})
+    Students.create(req.body)
     .then(newStudent => {
-        res.json('student was created')
+        res.json(newStudent)
     })
     .catch()   
 })

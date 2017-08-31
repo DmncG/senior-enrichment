@@ -10,6 +10,7 @@ const initialState = {
     studentsList: [],
     newStudentEntry: '',
     newEmailEntry: '',
+    newCampusId: 1,
     newCampus: '',
 }
 
@@ -25,6 +26,8 @@ const GET_STUDENTS = 'GET_STUDENTS';
 const GET_STUDENT = 'GET_STUDENT';
 const UPDATE_STUDENT = 'UPDATE_STUDENT';
 const WRITE_STUDENT = 'WRITE_STUDENT';
+const WRITE_EMAIL = 'WRITE_EMAIL';
+const WRITE_CAMPUS_ID = 'WRITE_CAMPUS_ID';
 
 
 //ACTION CREATORS
@@ -60,8 +63,18 @@ export function updateStudent (student) {
   return action;
 }
 
-export function writeStudent (newStudentEntry, newEmailEntry) {
+export function writeStudent (newStudentEntry) {
   const action = {type: WRITE_STUDENT, newStudentEntry}
+  return action;
+}
+
+export function writeEmail ( newEmailEntry) {
+  const action = {type: WRITE_EMAIL, newEmailEntry}
+  return action;
+}
+
+export function writeCampusId (newCampusId) {
+  const action = {type: WRITE_CAMPUS_ID, newCampusId}
   return action;
 }
 
@@ -99,9 +112,12 @@ export function postStudent (student, history) {
 
   return function thunk (dispatch) {
     return axios.post('/api/students/', student)
-    .then(res => res.data)
-    .then(newStudent=> {
-      dispatch(getStudent(newStudent))
+    .then(res => {
+      return res.data
+    })
+    .then(newStudent => {
+      dispatch(getStudent(newStudent));
+      history.push(`students/${newStudent.id}`)
     })
   }
 }
@@ -135,7 +151,13 @@ const rootReducer = function(state = initialState, action) {
       return Object.assign({}, state, {name: action.name});
 
     case WRITE_STUDENT:
-      return Object.assign({}, state, {newStudentEntry: action.newStudentEntry})
+      return Object.assign({}, state, {newStudentEntry: action.newStudentEntry});
+
+    case WRITE_EMAIL:
+      return Object.assign({}, state, {newEmailEntry: action.newEmailEntry});
+
+    case WRITE_CAMPUS_ID:
+      return Object.assign({}, state, {newCampusId: action.newCampusId} );
 
     default:
       return state;
