@@ -35,8 +35,7 @@ function NewStudent (props) {
 }
 
 const mapStateToProps = function (state, ownProps) {
-  console.log('statestudentry', state.newStudentEntry)
-  console.log('stateemailentry', state.newEmailEntry)
+  
   return {
     newStudentEntry: state.newStudentEntry,
     newEmailEntry: state.newEmailEntry,
@@ -55,7 +54,7 @@ const mapDispatchToProps = function (dispatch, ownProps) {
     },
     handleSubmit (e) {
       e.preventDefault();
-      console.log('eventcampusIdval', e.target.campusId.value)
+      
       let email= e.target.studentEmail.value;
       let name= e.target.studentName.value;
       let campusId = e.target.campusId.value;
@@ -63,14 +62,10 @@ const mapDispatchToProps = function (dispatch, ownProps) {
       dispatch(postStudent({name, email, campusId}, ownProps.history))
       dispatch(writeStudent(''));
       dispatch(writeEmail(''));
+
+
+
       
-
-      /*
-      newstudententry will be sent as name in axios
-      newemailentry will be sent as email in axios
-      are these two in res.data?
-      */
-
     }
   })
 }

@@ -2,7 +2,7 @@
 var Sequelize = require('sequelize')
 var db = require('../index.js')
 
-const defaultImage = "../public/images/defaultplanet.png"
+const defaultImage = "/images/defaultplanet.png"
 module.exports = db.define('campus', {
   name: { 
         type: Sequelize.STRING,

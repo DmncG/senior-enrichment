@@ -4,30 +4,17 @@ import {postCampus, writeCampus} from '../reducers';
 
 
 
-function NewStudent (props) {
+function NewCampus (props) {
   
-  const {newCampus, name, campusList, newEmailEntry, newCampusId, handleChange} = props;
+  const {newCampus, name, handleChange} = props;
   const handleSubmit = props.handleSubmit;
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
-      <label>Name</label>
-      <input value={newStudentEntry} name="studentName" onChange={handleChange} type="text" className="form-control" aria-describedby="nameHelp" placeholder="Enter name" />
-    </div>
-      <div className="form-group">
-        <label>Email address</label>
-        <input type="email" value={newEmailEntry} onChange={handleChange} name="studentEmail" className="form-control" aria-describedby="emailHelp" placeholder="Enter email" />
+        <label>Campus Name</label>
+        <input value={newCampus} name="campusName" onChange={handleChange} type="text" className="form-control" aria-describedby="nameHelp" placeholder="Enter campus name" />
       </div>
-      <div className="form-group">
-      <select onChange={handleChange} name="campusId" value={newCampusId} className="custom-select">
-        <option defaultValue>Choose a Campus</option>
-      {campusList.map(campus => {
-        return (
-          <option key={campus.id} value={campus.id}>{campus.name}</option>
-        )
-      })}
-      </select>
-      </div>
+
       <button type="submit" className="btn btn-primary">Submit</button>
     </form>
   )
@@ -35,44 +22,29 @@ function NewStudent (props) {
 }
 
 const mapStateToProps = function (state, ownProps) {
-  console.log('statestudentry', state.newStudentEntry)
-  console.log('stateemailentry', state.newEmailEntry)
+  console.log('statenewCampus', state.newCampus)
   return {
-    newStudentEntry: state.newStudentEntry,
-    newEmailEntry: state.newEmailEntry,
-    newCampusId: state.newCampusId,
-    campusList: state.campusList,
+    newCampus: state.newCampus,
   }
 }
 
 const mapDispatchToProps = function (dispatch, ownProps) {
   return ({ 
     handleChange (e) {
-      const name = e.target.name;
-      name === "studentName" ? 
-      dispatch(writeStudent(e.target.value)) : name === "studentEmail" ? 
-      dispatch(writeEmail(e.target.value)) : dispatch(writeCampusId(e.target.value))
+      dispatch(writeCampus(e.target.value))
+      console.log('***etargetvalue', e.target.value)
     },
     handleSubmit (e) {
       e.preventDefault();
-      console.log('eventcampusIdval', e.target.campusId.value)
-      let email= e.target.studentEmail.value;
-      let name= e.target.studentName.value;
-      let campusId = e.target.campusId.value;
+      console.log('eventcampusIdval', e.target.campusName.value)
       
-      dispatch(postStudent({name, email, campusId}, ownProps.history))
-      dispatch(writeStudent(''));
-      dispatch(writeEmail(''));
+      let name = e.target.campusName.value;
       
-
-      /*
-      newstudententry will be sent as name in axios
-      newemailentry will be sent as email in axios
-      are these two in res.data?
-      */
-
+      dispatch(postCampus({name}, ownProps.history))
+      dispatch(writeCampus(''));
+      
     }
   })
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewStudent);
+export default connect(mapStateToProps, mapDispatchToProps)(NewCampus);

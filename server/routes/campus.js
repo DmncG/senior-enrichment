@@ -22,7 +22,7 @@ router.get('/:id', function(req, res, next){
 })
 
 router.post('/', function(req, res, next){
-    Campus.create({name: req.body.name})
+    Campus.create(req.body)
     .then(newCampus => {
         res.json('newCampus')
     })

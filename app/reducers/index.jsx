@@ -43,8 +43,9 @@ export function getSingleCampus (campus) {
   return action;
 }
 
-export function writeCampus (campus) {
-  const action = {type: WRITE_CAMPUS, campus}
+export function writeCampus (newCampus) {
+  const action = {type: WRITE_CAMPUS, newCampus}
+  return action;
 }
 
 //STUDENT
@@ -122,6 +123,20 @@ export function postStudent (student, history) {
   }
 }
 
+export function postCampus (campus, history) {
+  
+    return function thunk (dispatch) {
+      return axios.post('/api/campus/', campus)
+      .then(res => {
+        return res.data
+      })
+      .then(newCampus => {
+        dispatch(getSingleCampus(newCampus));
+        history.push('campus/');
+      })
+    }
+  }
+
   
 //REDUCERS
 
@@ -137,7 +152,7 @@ const rootReducer = function(state = initialState, action) {
     return Object.assign({}, state, {campusList: [...state.campusList, action.campus]});
 
     case WRITE_CAMPUS:
-    return action.campus;
+    return Object.assign({}, state, {newCampus: action.newCampus})
 
     //STUDENTS
 
