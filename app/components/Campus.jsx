@@ -22,8 +22,10 @@ function Campus (props) {
                                 <NavLink to={`students/${campus.id}/${campus.id}`} activeClassName="active CampusListName">
                                 <span>
                                     {campus.name}
-                                    <button type="button" className="btn btn-outline-danger deleteCampus">Delete</button>
                                 </span>
+                                </NavLink>
+                                <NavLink to={`campus/${campus.id}/delete`} >
+                                <button type="button" className="btn btn-outline-danger deleteCampus">Delete</button>
                                 </NavLink>
                                 </div>
                             </li>

@@ -32,17 +32,17 @@ const mapDispatchToProps = function (dispatch, ownProps) {
   return ({ 
     handleChange (e) {
       dispatch(writeCampus(e.target.value))
-      console.log('***etargetvalue', e.target.value)
+      
     },
     handleSubmit (e) {
+      
       e.preventDefault();
-      console.log('eventcampusIdval', e.target.campusName.value)
       
       let name = e.target.campusName.value;
       
       dispatch(postCampus({name}, ownProps.history))
       dispatch(writeCampus(''));
-      
+
     }
   })
 }

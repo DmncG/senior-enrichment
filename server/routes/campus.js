@@ -38,8 +38,8 @@ router.put('/:id', function(req, res, next){
     .catch(next)
 })
 
-router.delete('/:campusId', function(req, res, next){
-    const campusIdURI = req.params.campusId;
+router.delete('/:id', function(req, res, next){
+    const campusIdURI = req.params.id;
     Campus.destroy({where: {id: campusIdURI }})
     .then(destroyed => {
         res.json('Campus was destroyed')

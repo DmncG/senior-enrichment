@@ -65,75 +65,9 @@ const mapDispatchToProps = function (dispatch, ownProps) {
 
 
 
-      
+
     }
   })
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewStudent);
-
-
-
-
-
-
-
-
-
-
-//just react
-
-// export default class NewStudent extends Component {
-//   constructor (props) {
-//     super(props);
-//     this.state = {
-//       newStudentEntry: '',
-//       newEmailEntry: ''
-//     };
-//     this.handleChangeName = this.handleChangeName.bind(this);
-//     this.handleChangeEmail = this.handleChangeEmail.bind(this);
-//     this.handleSubmit = this.handleSubmit.bind(this);
-//   }
-
-//   handleChangeName (e) {
-//     this.setState({newStudentEntry: e.target.value})
-//   }
-
-//   handleChangeEmail (e) {
-//     this.setState({newEmailEntry: e.target.value})
-//   }
-
-//   handleSubmit (e) {
-//     e.preventDefault();
-
-//     const addStudentName = this.props.postStudent()
-//     const addStudentEmail
-//   }
-
-//   render () {
-
-
-//     return (
-//       <form>
-//       <div className="form-group">
-//       <label>Name</label>
-//       <input value={this.state.newStudentEntry} onChange={this.handleChangeName} type="text" className="form-control" aria-describedby="emailHelp" placeholder="Enter name" />
-//     </div>
-//       <div className="form-group">
-//         <label>Email address</label>
-//         <input value={this.state.newEmailEntry} onChange={this.handleChangeEmail} type="email" className="form-control" aria-describedby="emailHelp" placeholder="Enter email" />
-//       </div>
-//       <div className="form-group">
-//       <select className="custom-select">
-//         <option defaultValue>Choose a Campus</option>
-//         <option value="1">One</option>
-//         <option value="2">Two</option>
-//         <option value="3">Three</option>
-//       </select>
-//       </div>
-//       <button type="submit" className="btn btn-primary">Submit</button>
-//     </form>
-//     )
-
-//   }
-// }

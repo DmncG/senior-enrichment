@@ -43,6 +43,10 @@ body {
     background-repeat: repeat;
 }
 
+.destroyedImage {
+    display: block;
+}
+
 
 
 

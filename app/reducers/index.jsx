@@ -20,6 +20,7 @@ const initialState = {
 const GET_CAMPUS = 'GET_CAMPUS';
 const GET_SINGLE_CAMPUS = 'GET_SINGLE_CAMPUS';
 const WRITE_CAMPUS ='WRITE_CAMPUS';
+const DELETE_CAMPUS ='DELETE_CAMPUS';
 
 //STUDENTS
 const GET_STUDENTS = 'GET_STUDENTS';
@@ -45,6 +46,12 @@ export function getSingleCampus (campus) {
 
 export function writeCampus (newCampus) {
   const action = {type: WRITE_CAMPUS, newCampus}
+  return action;
+}
+
+export function deleteCampus (campus) {
+  console.log('actioncreatorhit')
+  const action ={type: DELETE_CAMPUS, campus}
   return action;
 }
 
@@ -132,10 +139,20 @@ export function postCampus (campus, history) {
       })
       .then(newCampus => {
         dispatch(getSingleCampus(newCampus));
-        history.push('campus/');
+        history.push('campus');
       })
     }
   }
+
+export function destroyCampus (id) {
+  return function thunk (dispatch) {
+    return axios.delete(`/api/campus/${id}`, id)
+    .then(res => {
+      console.log('thisisidthunk', id)
+      dispatch(deleteCampus(id))
+    })
+  }
+}
 
   
 //REDUCERS
@@ -149,10 +166,16 @@ const rootReducer = function(state = initialState, action) {
       return Object.assign({}, state, {campusList: action.campusList}); 
 
     case GET_SINGLE_CAMPUS:
-    return Object.assign({}, state, {campusList: [...state.campusList, action.campus]});
+      return Object.assign({}, state, {campusList: [...state.campusList, action.campus]});
 
     case WRITE_CAMPUS:
-    return Object.assign({}, state, {newCampus: action.newCampus})
+      return Object.assign({}, state, {newCampus: action.newCampus});
+
+    case DELETE_CAMPUS:
+      console.log('***actioncampusreducer', action.campus)
+      return Object.assign({}, state, {campusList: state.campusList.filter(newCampus => newCampus.id !== action.campus)});
+      
+    
 
     //STUDENTS
 
