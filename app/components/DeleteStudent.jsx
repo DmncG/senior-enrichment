@@ -6,7 +6,7 @@ import {destroyStudent} from '../reducers';
 
 
 function DeleteStudent (props) {
-    const {destroyOnClick, studentsList} = props;
+    const {destroyOnClick, studentsList, redirectOnClick} = props;
     
     console.log('studentsList', studentsList)
     console.log('propsparams', props.match.params)
@@ -19,7 +19,7 @@ function DeleteStudent (props) {
         <div>
         <h3>Are you sure you want to expel this student?</h3>
         <img src="https://vignette3.wikia.nocookie.net/animal-jam-clans-1/images/c/c2/Mortybebb.png/revision/latest?cb=20160830030805" className="morty" />
-        <button type="button" className="btn btn-outline-primary">Meh</button>
+        <button type="button" onClick={redirectOnClick}className="btn btn-outline-primary">Meh</button>
         <button type="button" onClick={destroyOnClick} value={localStudent} className="btn btn-outline-danger">Bye Felicia</button>
         </div>
    )
@@ -56,7 +56,11 @@ const mapDispatchToProps = function (dispatch, ownProps) {
         dispatch(destroyStudent(name))
         ownProps.history.push('/students')
         
+      },
+      redirectOnClick (e) {
+        ownProps.history.push(`/students/${ownProps.match.params.studentId}`)
       }
+
     })
   }
 

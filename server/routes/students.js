@@ -33,9 +33,9 @@ router.get('/:campusId/:campusId', function(req, res, next){
 
 router.put('/:id', function(req, res, next) {
     const idURI = req.params.id
-    Students.update({name: req.body.name, email: req.body.email}, {where: {id : idURI}})
+    Students.update(req.body, {where: {id : idURI}})
     .then(updateStudent => {
-        res.json('student updated')
+        res.json(req.body)
     })
     .catch(next)
 })

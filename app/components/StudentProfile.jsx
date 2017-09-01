@@ -22,7 +22,9 @@ function StudentProfile (props) {
                return (
                    <li key={student.id}>
                      <span>Name: {student.name} Email: {student.email}
+                         <NavLink to={`/stud/${student.id}/update`} activeClassName="active">
                         <button type="button" className="btn btn-outline-info">Update</button>
+                        </NavLink >
                         <NavLink to={`/student/${student.id}/delete`} activeClassName="active">
                         <button type="button" className="btn btn-outline-danger">Delete</button>
                         </NavLink >

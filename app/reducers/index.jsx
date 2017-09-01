@@ -25,11 +25,11 @@ const DELETE_CAMPUS ='DELETE_CAMPUS';
 //STUDENTS
 const GET_STUDENTS = 'GET_STUDENTS';
 const GET_STUDENT = 'GET_STUDENT';
-const UPDATE_STUDENT = 'UPDATE_STUDENT';
 const WRITE_STUDENT = 'WRITE_STUDENT';
 const WRITE_EMAIL = 'WRITE_EMAIL';
 const WRITE_CAMPUS_ID = 'WRITE_CAMPUS_ID';
 const DELETE_STUDENT = 'DELETE_STUDENT';
+const UPDATE_STUDENT = 'UPDATE_STUDENT';
 
 
 //ACTION CREATORS
@@ -67,11 +67,6 @@ export function getStudent (student) {
   return action;
 }
 
-export function updateStudent (student) {
-  const action = {type: UPDATE_STUDENT, student}
-  return action;
-}
-
 export function writeStudent (newStudentEntry) {
   const action = {type: WRITE_STUDENT, newStudentEntry}
   return action;
@@ -91,6 +86,12 @@ export function deleteStudent (student) {
   const action = {type: DELETE_STUDENT, student}
   return action;
 
+}
+
+export function updateStudent (student) {
+  const action = {type: UPDATE_STUDENT, student}
+  console.log('actioncreatorstudent', student)
+  return action;
 }
 
 
@@ -124,7 +125,7 @@ export function fetchStudents () {
 }
 
 export function postStudent (student, history) {
-  
+  console.log('studentpost', student)
   return function thunk (dispatch) {
     return axios.post('/api/students/', student)
     .then(res => {
@@ -181,6 +182,21 @@ export function destroyStudent (id) {
   }
 }
 
+export function editStudent (update) {
+  return function thunk (dispatch) {
+    console.log('this is update', update)
+    return axios.put(`/api/students/${update.id}`, update)
+    .then(res => {
+      console.log('thisisresdata**', res.data)
+      return res.data})
+    .then(updatedStudent => {
+      console.log('updatedStudent***', updatedStudent)
+      dispatch(updateStudent(updatedStudent));
+    })
+    .catch();
+  }
+}
+
   
 //REDUCERS
 
@@ -210,9 +226,6 @@ const rootReducer = function(state = initialState, action) {
 
     case GET_STUDENT:
       return Object.assign({}, state, {studentsList: [...state.studentsList, action.student]});
-    
-    case UPDATE_STUDENT:
-      return Object.assign({}, state, {name: action.name});
 
     case WRITE_STUDENT:
       return Object.assign({}, state, {newStudentEntry: action.newStudentEntry});
@@ -225,6 +238,14 @@ const rootReducer = function(state = initialState, action) {
 
     case DELETE_STUDENT:
       return Object.assign({}, state, {studentsList: state.studentsList.filter(deletedStudent => deletedStudent.id !== Number(action.student))})
+
+    case UPDATE_STUDENT:
+      return Object.assign({}, state, {studentsList: state.studentsList.map(student => {
+                                          if(student.id === Number(action.student.id)) return action.student
+                                            else return student;  
+                                      }) 
+                                    })
+    //add reducer case for update!
 
     default:
       return state;

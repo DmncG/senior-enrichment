@@ -10,6 +10,7 @@ import CampusList from './CampusList';
 import StudentProfile from './StudentProfile';
 import DeleteCampus from './DeleteCampus';
 import DeleteStudent from './DeleteStudent';
+import UpdatedStudent from './UpdatedStudent';
 import store from '../store';
 import {fetchCampus, fetchStudents} from '../reducers';
 
@@ -43,6 +44,7 @@ import {fetchCampus, fetchStudents} from '../reducers';
               <Route path="/students/:studentId" component={StudentProfile} />
               <Route path="/campus/:id/delete" component={DeleteCampus} />
               <Route path="/student/:studentId/delete" component={DeleteStudent} />
+              <Route path="/stud/:id/update" component={UpdatedStudent} />
               <Redirect to="/home" component={Welcome} />
               
             </Switch>
