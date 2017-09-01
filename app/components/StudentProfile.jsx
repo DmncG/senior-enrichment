@@ -5,13 +5,22 @@ import {connect} from 'react-redux';
 
 
 function StudentProfile (props) {
+
+    const {studentsList, campusList} = props;
+
     let filteredArr = props.studentsList.filter((student) => {
         if(student.id === Number(props.match.params.studentId)){
             return student;
         }
     })
+
+    //get student's campus
+    let studentCampus = campusList.filter(campus => campus.id === filteredArr[0].campusId)[0].name;
     
+    console.log('studentCampus', studentCampus)
     console.log('***filteredArr', filteredArr);
+    console.log('campuslist', campusList)
+
   return (
     <div>
        <ul>
@@ -21,7 +30,7 @@ function StudentProfile (props) {
                    
                return (
                    <li key={student.id}>
-                     <span>Name: {student.name} Email: {student.email}
+                     <span>Name: {student.name} Email: {student.email} Campus: {studentCampus}
                          <NavLink to={`/stud/${student.id}/update`} activeClassName="active">
                         <button type="button" className="btn btn-outline-info">Update</button>
                         </NavLink >
