@@ -8,25 +8,26 @@ function NewStudent (props) {
   
   const {newStudentEntry, name, campusList, newEmailEntry, newCampusId, handleChange} = props;
   const handleSubmit = props.handleSubmit;
+  
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
-      <label>Name</label>
-      <input value={newStudentEntry} name="studentName" onChange={handleChange} type="text" className="form-control" aria-describedby="nameHelp" placeholder="Enter name" />
-    </div>
+        <label>Name</label>
+        <input value={newStudentEntry} name="studentName" onChange={handleChange} type="text" className="form-control" aria-describedby="nameHelp" placeholder="Enter name" />
+      </div>
       <div className="form-group">
         <label>Email address</label>
         <input type="email" value={newEmailEntry} onChange={handleChange} name="studentEmail" className="form-control" aria-describedby="emailHelp" placeholder="Enter email" />
       </div>
       <div className="form-group">
-      <select onChange={handleChange} name="campusId" value={newCampusId} className="custom-select">
-        <option defaultValue>Choose a Campus</option>
-      {campusList.map(campus => {
-        return (
-          <option key={campus.id} value={campus.id}>{campus.name}</option>
-        )
-      })}
-      </select>
+        <select onChange={handleChange} name="campusId" value={newCampusId} className="custom-select">
+          <option defaultValue>Choose a Campus</option>
+        {campusList.map(campus => {
+          return (
+            <option key={campus.id} value={campus.id}>{campus.name}</option>
+          )
+        })}
+        </select>
       </div>
       <button type="submit" className="btn btn-primary">Submit</button>
     </form>

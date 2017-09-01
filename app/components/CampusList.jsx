@@ -40,16 +40,8 @@ const mapStateToProps = (state, ownProps) => {
         studentsList: state.studentsList,
         campusList: state.campusList,
     }
-}
+};
 
-// const mapDispatchToProps = (dispatch, ownProps) => {
-//     return {
-//         campusList: function () {
-//             dispatch(getCampus())
-//         }
-//     }
-// }
-
-const SingleCampusListContainer = connect(mapStateToProps)(CampusList)
+const SingleCampusListContainer = connect(mapStateToProps)(CampusList);
 
 export default SingleCampusListContainer;

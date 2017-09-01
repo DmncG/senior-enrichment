@@ -18,15 +18,15 @@ function Campus (props) {
                         return (
                             <li key={campus.id} className="media">
                                 <div className="media-left">
-                                        <img className="media-object" src={campus.image} alt="image" />
-                                <NavLink to={`students/${campus.id}/${campus.id}`} activeClassName="active CampusListName">
-                                <span>
-                                    {campus.name}
-                                </span>
-                                </NavLink>
-                                <NavLink to={`campus/${campus.id}/delete`} >
-                                <button type="button" className="btn btn-outline-danger deleteCampus">Delete</button>
-                                </NavLink>
+                                    <img className="media-object" src={campus.image} alt="image" />
+                                    <NavLink to={`students/${campus.id}/${campus.id}`} activeClassName="active CampusListName">
+                                    <span>
+                                        {campus.name}
+                                    </span>
+                                    </NavLink>
+                                    <NavLink to={`campus/${campus.id}/delete`} >
+                                    <button type="button" className="btn btn-outline-danger deleteCampus">Delete</button>
+                                    </NavLink>
                                 </div>
                             </li>
                         )
@@ -44,8 +44,7 @@ function Campus (props) {
             <p></p>
             </div>
         </div>
-      </div>
-       
+      </div>   
     </div>
   );
 }
