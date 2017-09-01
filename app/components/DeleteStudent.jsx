@@ -23,20 +23,6 @@ function DeleteStudent (props) {
         <button type="button" onClick={destroyOnClick} value={localStudent} className="btn btn-outline-danger">Bye Felicia</button>
         </div>
    )
-    // const {destroyOnClick, campusList} = props
-
-    // //find the campus to be deleted
-    // let localCampus = campusList.find(campus => campus.id === Number(props.match.params.id)).id;
-
-
-    // return (
-    //     <div>
-    //         <h2>Are you sure you want to wipe out this planet's err... school's existence? </h2>
-    //         <img src="/images/exploding_planet.png" className="destroyedImage" />
-    //         <button type="button" className="btn btn-outline-primary">Not really</button>
-    //         <button type="button" onClick={destroyOnClick} value={localCampus} className="btn btn-outline-danger">Goodbye world</button>
-    //     </div>
-    // )
 };
 
 const mapStateToProps = function (state, ownProps) {
