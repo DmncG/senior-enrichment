@@ -38,12 +38,12 @@ import {fetchCampus, fetchStudents} from '../reducers';
               <Route path="/home" component={Welcome} />
               <Route path="/new-student" component={NewStudent} />
               <Route path="/new-campus" component={NewCampus} />
+              <Route path="/campus/:id/delete" component={DeleteCampus} />
+              <Route path="/student/:studentId/delete" component={DeleteStudent} />
               <Route exact path="/campus" component={Campus} />
               <Route exact path="/students" component={Students} />
               <Route exact path="/students/:id/:id" component={CampusList} />
               <Route path="/students/:studentId" component={StudentProfile} />
-              <Route path="/campus/:id/delete" component={DeleteCampus} />
-              <Route path="/student/:studentId/delete" component={DeleteStudent} />
               <Route path="/stud/:id/update" component={UpdatedStudent} />
               <Redirect to="/home" component={Welcome} />
               
