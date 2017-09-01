@@ -24,7 +24,7 @@ router.get('/:id', function(req, res, next){
 router.post('/', function(req, res, next){
     Campus.create(req.body)
     .then(newCampus => {
-        res.json('newCampus')
+        res.json(newCampus)
     })
     .catch(next)
 })
@@ -44,6 +44,6 @@ router.delete('/:id', function(req, res, next){
     .then(destroyed => {
         res.json('Campus was destroyed')
     })
-    .catch()
+    .catch(error => console.error)
 })
 

@@ -25,6 +25,7 @@ const mapStateToProps = function (state, ownProps) {
   console.log('statenewCampus', state.newCampus)
   return {
     newCampus: state.newCampus,
+    image: state.image,
   }
 }
 
@@ -35,11 +36,12 @@ const mapDispatchToProps = function (dispatch, ownProps) {
       
     },
     handleSubmit (e) {
-      
+
       e.preventDefault();
       
       let name = e.target.campusName.value;
-      
+      console.log(e.target.campusName)
+      console.log('this is name', name)
       dispatch(postCampus({name}, ownProps.history))
       dispatch(writeCampus(''));
 

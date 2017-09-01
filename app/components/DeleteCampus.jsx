@@ -6,7 +6,7 @@ import {destroyCampus} from '../reducers';
 
 
 function DeleteCampus (props) {
-    const {destroyOnClick, consoleOnClick, campusList} = props
+    const {destroyOnClick, campusList} = props
 
     //find the campus to be deleted
     let localCampus = campusList.find(campus => campus.id === Number(props.match.params.id)).id;
@@ -20,21 +20,7 @@ function DeleteCampus (props) {
             <button type="button" onClick={destroyOnClick} value={localCampus} className="btn btn-outline-danger">Goodbye world</button>
         </div>
     )
-}
-//   const {newCampus, name, handleChange} = props;
-//   const handleSubmit = props.handleSubmit;
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <div className="form-group">
-//         <label>Campus Name</label>
-//         <input value={newCampus} name="campusName" onChange={handleChange} type="text" className="form-control" aria-describedby="nameHelp" placeholder="Enter campus name" />
-//       </div>
-
-//       <button type="submit" className="btn btn-primary">Submit</button>
-//     </form>
-//   )
-
-// }
+};
 
 const mapStateToProps = function (state, ownProps) {
   console.log('campusList', state.campusList)

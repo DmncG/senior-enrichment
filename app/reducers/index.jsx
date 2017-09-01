@@ -29,6 +29,7 @@ const UPDATE_STUDENT = 'UPDATE_STUDENT';
 const WRITE_STUDENT = 'WRITE_STUDENT';
 const WRITE_EMAIL = 'WRITE_EMAIL';
 const WRITE_CAMPUS_ID = 'WRITE_CAMPUS_ID';
+const DELETE_STUDENT = 'DELETE_STUDENT';
 
 
 //ACTION CREATORS
@@ -86,6 +87,12 @@ export function writeCampusId (newCampusId) {
   return action;
 }
 
+export function deleteStudent (student) {
+  const action = {type: DELETE_STUDENT, student}
+  return action;
+
+}
+
 
 
 //THUNK CREATORS
@@ -117,30 +124,38 @@ export function fetchStudents () {
 }
 
 export function postStudent (student, history) {
-
+  
   return function thunk (dispatch) {
     return axios.post('/api/students/', student)
     .then(res => {
+      console.log('***res.data', res.data)
       return res.data
     })
     .then(newStudent => {
       dispatch(getStudent(newStudent));
       history.push(`students/${newStudent.id}`)
     })
+    .catch();
   }
 }
 
 export function postCampus (campus, history) {
-  
+  //campus is {name, image}
+    console.log('this is campus', campus)
+    let name = campus.name;
     return function thunk (dispatch) {
+      console.log('campusthunk', campus)
       return axios.post('/api/campus/', campus)
       .then(res => {
+        console.log('this is res', res.data)
         return res.data
       })
       .then(newCampus => {
+        console.log('newCampus', newCampus)
         dispatch(getSingleCampus(newCampus));
         history.push('campus');
       })
+      .catch();
     }
   }
 
@@ -151,6 +166,18 @@ export function destroyCampus (id) {
       console.log('thisisidthunk', id)
       dispatch(deleteCampus(id))
     })
+    .catch();
+  }
+}
+
+export function destroyStudent (id) {
+  return function thunk (dispatch) {
+    return axios.delete(`/api/students/${id}`, id)
+    .then(res =>{
+      console.log('thisisstudentidthunk', id)
+      dispatch(deleteStudent(id))
+    })
+    .catch();
   }
 }
 
@@ -172,8 +199,7 @@ const rootReducer = function(state = initialState, action) {
       return Object.assign({}, state, {newCampus: action.newCampus});
 
     case DELETE_CAMPUS:
-      console.log('***actioncampusreducer', action.campus)
-      return Object.assign({}, state, {campusList: state.campusList.filter(newCampus => newCampus.id !== action.campus)});
+      return Object.assign({}, state, {campusList: state.campusList.filter(deletedCampus => deletedCampus.id !== Number(action.campus))});
       
     
 
@@ -196,6 +222,9 @@ const rootReducer = function(state = initialState, action) {
 
     case WRITE_CAMPUS_ID:
       return Object.assign({}, state, {newCampusId: action.newCampusId} );
+
+    case DELETE_STUDENT:
+      return Object.assign({}, state, {studentsList: state.studentsList.filter(deletedStudent => deletedStudent.id !== Number(action.student))})
 
     default:
       return state;
